@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>レストラン評価アプリ</title>
+    
+    <!-- PWA設定 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- スタイルシート -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <!-- ローディング画面 -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- ヘッダー -->
+    <header>
+        <h1>🍽️ レストラン評価</h1>
+        <button id="refreshBtn" class="icon-btn">
+            <span class="material-icons">refresh</span>
+        </button>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- レストラン一覧 -->
+        <div id="restaurantList" class="restaurant-list">
+            <!-- JavaScriptで動的に生成 -->
+        </div>
+    </main>
+
+    <!-- 評価モーダル -->
+    <div id="ratingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">レストラン評価</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- 評価フォーム -->
+                <div class="rating-section">
+                    <label>🍽️ 味・料理の質</label>
+                    <div class="rating-controls">
+                        <div class="slider-container">
+                            <span>0.0</span>
+                            <input type="range" class="rating-slider" data-rating="taste" min="0" max="5" step="0.1" value="0">
+                            <span>5.0</span>
+                        </div>
+                        <div class="input-container">
+                            <input type="number" class="rating-input" data-rating="taste" min="0" max="5" step="0.1" value="0">
+                            <span class="rating-value">0.0</span>
+                            <div class="stars-display" data-rating="taste">☆☆☆☆☆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rating-section">
+                    <label>🏠 雰囲気・内装</label>
+                    <div class="rating-controls">
+                        <div class="slider-container">
+                            <span>0.0</span>
+                            <input type="range" class="rating-slider" data-rating="atmosphere" min="0" max="5" step="0.1" value="0">
+                            <span>5.0</span>
+                        </div>
+                        <div class="input-container">
+                            <input type="number" class="rating-input" data-rating="atmosphere" min="0" max="5" step="0.1" value="0">
+                            <span class="rating-value">0.0</span>
+                            <div class="stars-display" data-rating="atmosphere">☆☆☆☆☆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rating-section">
+                    <label>👥 サービス・接客</label>
+                    <div class="rating-controls">
+                        <div class="slider-container">
+                            <span>0.0</span>
+                            <input type="range" class="rating-slider" data-rating="service" min="0" max="5" step="0.1" value="0">
+                            <span>5.0</span>
+                        </div>
+                        <div class="input-container">
+                            <input type="number" class="rating-input" data-rating="service" min="0" max="5" step="0.1" value="0">
+                            <span class="rating-value">0.0</span>
+                            <div class="stars-display" data-rating="service">☆☆☆☆☆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rating-section">
+                    <label>💰 コスパ</label>
+                    <div class="rating-controls">
+                        <div class="slider-container">
+                            <span>0.0</span>
+                            <input type="range" class="rating-slider" data-rating="costPerformance" min="0" max="5" step="0.1" value="0">
+                            <span>5.0</span>
+                        </div>
+                        <div class="input-container">
+                            <input type="number" class="rating-input" data-rating="costPerformance" min="0" max="5" step="0.1" value="0">
+                            <span class="rating-value">0.0</span>
+                            <div class="stars-display" data-rating="costPerformance">☆☆☆☆☆</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="memo-section">
+                    <label>📝 メモ（オプション）</label>
+                    <textarea id="memoInput" rows="3" placeholder="感想やメモを入力..."></textarea>
+                </div>
+
+                <div class="total-score">
+                    総合点: <span id="totalScore">0.0</span>
+                    <div id="ratingLabel" class="rating-label"></div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="saveRatingBtn" class="primary-btn">💾 評価を保存</button>
+                <button class="secondary-btn close-btn">❌ キャンセル</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- メッセージトースト -->
+    <div id="toast" class="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="app.js"></script>
+</body>
+</html>
